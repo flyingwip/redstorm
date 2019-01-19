@@ -15,7 +15,12 @@
 
 const Route = use('Route')
 
-Route.on('/').render('home').as('home').middleware(['auth'])
+Route.on('/home').render('home').as('home').middleware(['auth'])
+// Route.get('/home', ({ view }) => {
+//   return view.render('home')
+// })
+Route.get('/', 'StravaController.index').middleware(['authenticated'])
+Route.get('/connect', 'StravaController.connect').middleware(['auth'])
 
 Route.get('register', 'Auth/RegisterController.showRegisterForm').middleware([
   'authenticated'
